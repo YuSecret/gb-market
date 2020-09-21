@@ -32,13 +32,13 @@ public class ProductService {
 
         for(int i=0; i<lp.size(); i++) {
             if (byMin) {
-                if (lp.get(i).getId() > id) {
+                if (lp.get(i).getId() >= id) {
                     lrez.add(lp.get(i));
                 }
             }
             else {
                 if (lp.get(i).getId()==1) continue;
-                if (lp.get(i).getId() < id) {
+                if (lp.get(i).getId() <= id) {
                     lrez.add(lp.get(i));
                 }
             }

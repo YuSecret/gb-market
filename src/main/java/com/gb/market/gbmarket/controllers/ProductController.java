@@ -38,8 +38,10 @@ public class ProductController {
     @GetMapping("/max/{id}")
     @ResponseBody
     public List<Product> filterMaxId(@PathVariable Long id) {
+        //на id=1 почему то закольщовка
         return productService.findWhereMinMax(id , false);
     }
+
     //A так почему то не работает
     /*public String filterMinId(Model model, @PathVariable Long min) {
         model.addAttribute("products", productService.findWhereMin(min));
