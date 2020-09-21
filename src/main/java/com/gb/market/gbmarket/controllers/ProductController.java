@@ -30,22 +30,23 @@ public class ProductController {
     public Product getOneProductById(@PathVariable Long id) {
         return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id: " + id + " doesn't exists"));
     }
+
     @GetMapping("/min/{id}")
-    @ResponseBody
-    public List<Product> filterMinId(@PathVariable Long id) {
-        return productService.findWhereMinMax(id, true);
+    public String filterMinId(Model model, @PathVariable Long id) {
+        model.addAttribute("products", productService.filterByMinId(id));
+        return "products";
     }
+
     @GetMapping("/max/{id}")
-    @ResponseBody
-    public List<Product> filterMaxId(@PathVariable Long id) {
-        //на id=1 почему то закольщовка
-        return productService.findWhereMinMax(id , false);
+    public String filterMaxId(Model model, @PathVariable Long id) {
+        model.addAttribute("products", productService.filterByMaxId(id));
+        return "products";
     }
 
-    //A так почему то не работает
-    /*public String filterMinId(Model model, @PathVariable Long min) {
-        model.addAttribute("products", productService.findWhereMin(min));
-        return "productsFilter";
-    }*/
-
+    //Не понятно почему тут закольцовка на 1-м id
+    @GetMapping("/jsonMax/{id}")
+    @ResponseBody
+    public List<Product> filterMaxIdJSON(Model model, @PathVariable Long id) {
+        return productService.filterByMaxId(id);
+    }
 }

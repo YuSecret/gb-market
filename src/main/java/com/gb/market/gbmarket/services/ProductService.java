@@ -25,24 +25,8 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    public List<Product> findWhereMinMax(Long id, boolean byMin) {
-
-        List<Product> lp= productRepository.findAll();
-        List<Product> lrez = new ArrayList<>();
-
-        for(int i=0; i<lp.size(); i++) {
-            if (byMin) {
-                if (lp.get(i).getId() >= id) {
-                    lrez.add(lp.get(i));
-                }
-            }
-            else {
-                if (lp.get(i).getId()==1) continue;
-                if (lp.get(i).getId() <= id) {
-                    lrez.add(lp.get(i));
-                }
-            }
-        }
-        return lrez;
+    public List<Product> filterByMaxId(Long id) {
+        return productRepository.findAllByIdLessThan(id);
     }
+    public List<Product> filterByMinId(Long id) { return productRepository.findAllByIdGreaterThan(id);}
 }
