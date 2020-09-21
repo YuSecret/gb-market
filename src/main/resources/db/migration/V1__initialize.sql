@@ -46,6 +46,7 @@ values
 ('Bread19', 40);
 
 
+
 insert into orders (customer_id, product_id, current_price)
 values
 (1, 1, 24);

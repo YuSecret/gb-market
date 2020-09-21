@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/products")
 @AllArgsConstructor
@@ -28,4 +30,20 @@ public class ProductController {
     public Product getOneProductById(@PathVariable Long id) {
         return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id: " + id + " doesn't exists"));
     }
+    @GetMapping("/min/{id}")
+    @ResponseBody
+    public List<Product> filterMinId(@PathVariable Long id) {
+        return productService.findWhereMinMax(id, true);
+    }
+    @GetMapping("/max/{id}")
+    @ResponseBody
+    public List<Product> filterMaxId(@PathVariable Long id) {
+        return productService.findWhereMinMax(id , false);
+    }
+    //A так почему то не работает
+    /*public String filterMinId(Model model, @PathVariable Long min) {
+        model.addAttribute("products", productService.findWhereMin(min));
+        return "productsFilter";
+    }*/
+
 }
