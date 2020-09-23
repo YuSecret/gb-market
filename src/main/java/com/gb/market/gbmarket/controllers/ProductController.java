@@ -36,7 +36,7 @@ public class ProductController {
         model.addAttribute("products", productService.filterByMinId(id));
         return "products";
     }
-
+//Этот принт в ветке tmp
     @GetMapping("/max/{id}")
     public String filterMaxId(Model model, @PathVariable Long id) {
         model.addAttribute("products", productService.filterByMaxId(id));
