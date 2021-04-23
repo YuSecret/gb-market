@@ -59,5 +59,5 @@ public class ProductController {
         productService.deleteById(id);
         return "ok";
     }
-
+    // поменял2
 }
